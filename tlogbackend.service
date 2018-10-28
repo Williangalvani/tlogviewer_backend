@@ -1,0 +1,15 @@
+[Unit]
+Description=tlogviewer backend
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/home/will/git/tlogbackend
+ExecStart=/usr/bin/python3 /home/will/git/tlogbackend/main.py
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+
