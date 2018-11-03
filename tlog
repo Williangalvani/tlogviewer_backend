@@ -1,0 +1,22 @@
+server {
+client_max_body_size 200M;
+                listen       80;
+                server_name  tlog.ibexcps.com tlog.galvanicloop.com;
+                access_log   tlog.access.log;
+                location / {
+                    root   /var/www/html/tlog/tlog;
+                    index  index.html index.htm;
+                }
+		location /download {
+                  proxy_pass          http://localhost:8001;
+                  }
+		location ~ /upload {
+                  proxy_pass          http://localhost:8001;
+                  }
+		location ~ /eniro {
+                  rewrite ^/eniro(/.*)$ /geowebcache/service/tms1.0.0/map/$1 break;
+                  proxy_pass          http://map.eniro.com;
+                  }
+        
+}
+
